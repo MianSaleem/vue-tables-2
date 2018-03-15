@@ -24,26 +24,30 @@ module.exports = function (h) {
       ));
     }
     return h(
-      "select",
-      { "class": selectClass + " dropdown-pagination",
-        directives: [{
-          name: "show",
-          value: _this.totalPages > 1
-        }],
-        attrs: {
-          name: "page",
+      "div",
+      { "class": "select" },
+      [h(
+        "select",
+        { "class": selectClass + " dropdown-pagination",
+          directives: [{
+            name: "show",
+            value: _this.totalPages > 1
+          }],
+          attrs: {
+            name: "page",
 
-          id: id
+            id: id
+          },
+          ref: "page",
+          domProps: {
+            "value": _this.page
+          },
+          on: {
+            "change": _this.setPage.bind(_this, null, false)
+          }
         },
-        ref: "page",
-        domProps: {
-          "value": _this.page
-        },
-        on: {
-          "change": _this.setPage.bind(_this, null, false)
-        }
-      },
-      [pages]
+        [pages]
+      )]
     );
   };
 };
